@@ -9,3 +9,11 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
+ingredients = "rasberries"
+response = client.chat.completions.create(
+  model="gpt-4o-mini",
+  messages=[
+    {"role": "system", "content": "You are a recipe assistant that will make a recipe based off ingredients that the client has"},
+    {"role": "user", "content": ingredients}
+  ]
+)
