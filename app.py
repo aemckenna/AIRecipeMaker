@@ -1,6 +1,5 @@
-from flask import Flask,render_template,request
+from flask import Flask, render_template, request
 import openai
-import os
 
 # Set your OpenAI API key
 openai.api_key = "sk--ygmOsjWiF5YF7PDdBk_U-mvaapEI37eZgXkEblZRmT3BlbkFJ9zdJc0XJEnjPFwXPQOtDQ5pSp87cDIk-ZBx3KQpr8A"
@@ -8,9 +7,17 @@ openai.api_key = "sk--ygmOsjWiF5YF7PDdBk_U-mvaapEI37eZgXkEblZRmT3BlbkFJ9zdJc0XJE
 app = Flask(__name__)
 
 @app.route("/")
-def generate_recipe():
-    ingredients = "raspberries"
+def index():
+    # Render the form page
+    return render_template("index.html")
 
+@app.route("/generate", methods=["POST"])
+def generate_recipe():
+    # Get all the ingredients from the form
+    ingredients_list = request.form.getlist("ingredients")
+    ingredients = ", ".join(ingredients_list)
+
+    # Generate a recipe using OpenAI API
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[

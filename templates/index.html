@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" style="font-family: Arial">
+    <title>Recipe Generator</title>
+    <script>
+        function addIngredientField() {
+            const container = document.getElementById('ingredients-container');
+            const index = container.children.length + 1; // Index for new fields
+            const field = document.createElement('div');
+            field.innerHTML = `
+                <p>Ingredient ${index}: <input type="text" name="ingredients" /></p>
+            `;
+            container.appendChild(field);
+        }
+    </script>
+</head>
+<body>
+    <h1>Recipe Generator</h1>
+    <form action="/generate" method="POST">
+        <div id="ingredients-container">
+            <p>Ingredient 1: <input type="text" name="ingredients" /></p>
+        </div>
+        <p><button type="button" onclick="addIngredientField()">Add Another Ingredient</button></p>
+        <p><input type="submit" value="Generate Recipe" /></p>
+    </form>
+</body>
+</html>
