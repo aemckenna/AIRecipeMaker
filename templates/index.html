@@ -2,28 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" style="font-family: Arial">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Recipe Generator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #343a40;
+            text-align: center;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+        }
+        .btn-custom:hover {
+            background-color: #218838;
+        }
+    </style>
     <script>
         function addIngredientField() {
             const container = document.getElementById('ingredients-container');
-            const index = container.children.length + 1; // Index for new fields
+            const index = container.children.length + 1;
             const field = document.createElement('div');
+            field.classList.add('form-group');
             field.innerHTML = `
-                <p>Ingredient ${index}: <input type="text" name="ingredients" /></p>
+                <label for="ingredient${index}">Ingredient ${index}:</label>
+                <input type="text" class="form-control" id="ingredient${index}" name="ingredients" placeholder="Enter an ingredient" />
             `;
             container.appendChild(field);
         }
     </script>
 </head>
 <body>
-    <h1>Recipe Generator</h1>
-    <form action="/generate" method="POST">
-        <div id="ingredients-container">
-            <p>Ingredient 1: <input type="text" name="ingredients" /></p>
-        </div>
-        <p><button type="button" onclick="addIngredientField()">Add Another Ingredient</button></p>
-        <p><input type="submit" value="Generate Recipe" /></p>
-    </form>
+    <div class="container">
+        <h1>Recipe Generator</h1>
+        <form action="/generate" method="POST">
+            <div id="ingredients-container">
+                <div class="form-group">
+                    <label for="ingredient1">Ingredient 1:</label>
+                    <input type="text" class="form-control" id="ingredient1" name="ingredients" placeholder="Enter an ingredient" />
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addIngredientField()">Add Another Ingredient</button>
+            <button type="submit" class="btn btn-custom mt-3">Generate Recipe</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
