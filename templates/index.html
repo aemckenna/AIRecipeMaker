@@ -34,6 +34,35 @@
         .btn-custom:hover {
             background-color: #218838;
         }
+        .recipe-container {
+            margin-top: 40px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .recipe-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .recipe-ingredients {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .recipe-instructions {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .recipe-image {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .recipe-image img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
     </style>
     <script>
         function addIngredientField() {
@@ -62,6 +91,17 @@
             <button type="button" class="btn btn-secondary" onclick="addIngredientField()">Add Another Ingredient</button>
             <button type="submit" class="btn btn-custom mt-3">Generate Recipe</button>
         </form>
+
+        {% if recipe %}
+        <div class="recipe-container mt-4">
+            <div class="recipe-title">Generated Recipe:</div>
+            <div class="recipe-ingredients"><strong>Ingredients:</strong> {{ ingredients }}</div>
+            <div class="recipe-instructions"><strong>Instructions:</strong> {{ recipe }}</div>
+            <div class="recipe-image">
+                <img src="{{ image_url }}" alt="Generated Recipe Image">
+            </div>
+        </div>
+        {% endif %}
     </div>
 
     <!-- Bootstrap JS and dependencies -->
