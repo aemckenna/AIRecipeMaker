@@ -50,10 +50,12 @@
         .recipe-ingredients {
             font-size: 18px;
             margin-bottom: 10px;
+            color: #6c757d;
         }
         .recipe-instructions {
             font-size: 16px;
             line-height: 1.6;
+            color: #495057;
         }
         .recipe-image {
             margin-top: 20px;
@@ -63,20 +65,15 @@
             max-width: 100%;
             border-radius: 8px;
         }
-    </style>
-    <script>
-        function addIngredientField() {
-            const container = document.getElementById('ingredients-container');
-            const index = container.children.length + 1;
-            const field = document.createElement('div');
-            field.classList.add('form-group');
-            field.innerHTML = `
-                <label for="ingredient${index}">Ingredient ${index}:</label>
-                <input type="text" class="form-control" id="ingredient${index}" name="ingredients" placeholder="Enter an ingredient" />
-            `;
-            container.appendChild(field);
+        .ingredients-list,
+        .instructions-list {
+            margin-top: 15px;
         }
-    </script>
+        .ingredients-list li,
+        .instructions-list li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -95,8 +92,22 @@
         {% if recipe %}
         <div class="recipe-container mt-4">
             <div class="recipe-title">Generated Recipe:</div>
-            <div class="recipe-ingredients"><strong>Ingredients:</strong> {{ ingredients }}</div>
-            <div class="recipe-instructions"><strong>Instructions:</strong> {{ recipe }}</div>
+            <div class="recipe-ingredients">
+                <strong>Ingredients:</strong>
+                <ul class="ingredients-list">
+                    {% for ingredient in ingredients.split(',') %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="recipe-instructions">
+                <strong>Instructions:</strong>
+                <ul class="instructions-list">
+                    {% for line in recipe.split('\n') %}
+                        <li>{{ line }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
             <div class="recipe-image">
                 <img src="{{ image_url }}" alt="Generated Recipe Image">
             </div>
