@@ -26,59 +26,33 @@
             text-align: center;
         }
         .btn-custom {
-            background-color: #28a745;
+            background-color: #287fa7;
             color: white;
             border-radius: 10px;
             padding: 10px 20px;
         }
         .btn-custom:hover {
-            background-color: #218838;
-        }
-        .recipe-container {
-            margin-top: 40px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .recipe-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .recipe-ingredients {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #6c757d;
-        }
-        .recipe-instructions {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #495057;
-        }
-        .recipe-image {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .recipe-image img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        .ingredients-list,
-        .instructions-list {
-            margin-top: 15px;
-        }
-        .ingredients-list li,
-        .instructions-list li {
-            margin-bottom: 10px;
+            background-color: #215688;
         }
     </style>
+    <script>
+        function addIngredientField() {
+            const container = document.getElementById('ingredients-container');
+            const index = container.children.length + 1;
+            const field = document.createElement('div');
+            field.classList.add('form-group');
+            field.innerHTML = `
+                <label for="ingredient${index}">Ingredient ${index}:</label>
+                <input type="text" class="form-control" id="ingredient${index}" name="ingredients" placeholder="Enter an ingredient" />
+            `;
+            container.appendChild(field);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Recipe Generator</h1>
-        <form action="/generate" method="POST">
+        <form action="/recipe" method="POST">
             <div id="ingredients-container">
                 <div class="form-group">
                     <label for="ingredient1">Ingredient 1:</label>
@@ -88,31 +62,6 @@
             <button type="button" class="btn btn-secondary" onclick="addIngredientField()">Add Another Ingredient</button>
             <button type="submit" class="btn btn-custom mt-3">Generate Recipe</button>
         </form>
-
-        {% if recipe %}
-        <div class="recipe-container mt-4">
-            <div class="recipe-title">Generated Recipe:</div>
-            <div class="recipe-ingredients">
-                <strong>Ingredients:</strong>
-                <ul class="ingredients-list">
-                    {% for ingredient in ingredients.split(',') %}
-                        <li>{{ ingredient }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="recipe-instructions">
-                <strong>Instructions:</strong>
-                <ul class="instructions-list">
-                    {% for line in recipe.split('\n') %}
-                        <li>{{ line }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="recipe-image">
-                <img src="{{ image_url }}" alt="Generated Recipe Image">
-            </div>
-        </div>
-        {% endif %}
     </div>
 
     <!-- Bootstrap JS and dependencies -->

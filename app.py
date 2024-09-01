@@ -61,7 +61,7 @@ def generate_recipe():
 
         image_url = image_response['data'][0]['url']
 
-        return f"<p>Recipe: {recipe}</p><img src='{image_url}' alt='Generated Image'>"
+        return f"<h>Recipe: {recipe}</p><img src='{image_url}' alt='Generated Image'>"
 
     except openai.error.InvalidRequestError as e:
         return f"<p>There was an issue generating the recipe or image: {str(e)}</p>"
